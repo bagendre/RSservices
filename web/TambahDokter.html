@@ -1,0 +1,144 @@
+
+<html>
+    <head>
+        <title>Rumah Sakit</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+
+            #myHeader {
+                background-image: url("Hospitall.jpg");
+                margin: 20px;
+                margin-bottom: 20px;
+                color: orange;
+                padding: 10%;
+                text-align: center;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                font-family: Lucida Handwriting;
+                font-size: 50px;   
+            }
+            #myfooter{
+                color:black;
+                background-color: yellow;
+                padding: 30px;
+                text-align: center;
+                float: bottom;
+
+                margin:0px;
+            }
+            .button {
+                background-color: #00FF00; /* Green */
+                border: none;
+                color: black;
+                padding: 16px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                text-align: center;
+                cursor: pointer;
+                margin-bottom: 20px;
+                width: 15%;
+                border-radius: 6px;
+                margin-left: 70px;
+                margin-top: 15px;
+            }
+            .submit_button {
+                background-color: #559EFF; /* Green */
+                border: none;
+                color: black;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                margin-left: 25%;
+                margin-bottom: 23px;
+                float: center;
+                border-radius: 5px;
+                width: 20%;
+            }
+            .button2:hover {
+                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+            }
+            .form{
+                width: 70%;
+                height: 50%;
+                float: right;
+                position: relative;
+                margin-right: 70px;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+    <body style="background-color:#00BFFF;" onload="checkCookie()">
+        <div><h2 id="myHeader">Rumah Sakit ANYAR</h2></div>  <div class="form-group">
+            <form onsubmit="return make_json(this);" method="POST">
+                <br/>
+                <br/>
+                <input style="margin-left: 10%; width: 20%; height: 7%" type="text" name="nama" value="" placeholder="Nama"/>
+                <br/>
+                <br/>
+                <input style="margin-left: 10%; width: 20%; height: 7%" type="text" name="spesialis" value="" placeholder="Spesialis"/>
+                <br/>
+                <br/>
+                <input style="margin-left: 10%; width: 20%; height: 7%" class="button" type="submit" value="Tambah"/>
+            </form>
+            <pre id="berhasil">
+            </pre>
+        </div>
+
+        <div><a class="button" href="Rumah_Sakit.html">Home</a>
+        <a class="button" href="bacadokter.html">Baca Dokter</a>
+        <a class="button" href="tambahklinik.html">Tambah Klinik</a></div>
+        <div><h3 id="myfooter">TERIMA KASIH</h3></div>
+        <script>
+            function make_json(form) {
+                var json = {
+                    "nama": form.nama.value,
+                    "spesialis": form.spesialis.value,
+                };
+                var html = JSON.stringify(json, 0, 100);
+                var Url = "http://202.94.83.190:8080/165314042RS/webresources/Dokter/addDokter";
+//                var Url = "http://localhost:8084/165314042RS/webresources/Dokter/addDokter";
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', Url, true);
+                xhr.setRequestHeader("Content-type", "application/json");
+                xhr.send(html);
+
+                document.getElementById("berhasil").innerHTML = "daftar dokter Berhasil";
+                return false;
+            }
+            function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+            function checkCookie() {
+                var email = getCookie("email");
+                var password = getCookie("password");
+                if (email != "") {
+                    alert("Welcome " + email + ", Password: " + password);
+                }
+            }
+
+        </script>   
+    </body>
+</html>

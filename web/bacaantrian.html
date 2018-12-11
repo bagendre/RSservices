@@ -1,0 +1,166 @@
+
+<html>
+    <head>
+        <title>Rumah Sakit</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+
+            #myHeader {
+                background-image: url("Hospitall.jpg");
+                margin: 20px;
+                margin-bottom: 20px;
+                color: orange;
+                padding: 10%;
+                text-align: center;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                font-family: Lucida Handwriting;
+                font-size: 50px;
+            }
+            #myfooter{
+                color:black;
+                background-color: yellow;
+                padding: 30px;
+                text-align: center;
+                float: bottom;
+
+                margin:0px;
+            }
+            #tabel {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 50%;
+            }
+
+            #tabel td, #tabel th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #tabel tr:nth-child(even){background-color: #f2f2f2;}
+
+            #tabel tr:hover {background-color: #006400;}
+
+            #tabel th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #006400;
+                color: white;
+            }
+            .button {
+                background-color: #00FF00; /* Green */
+                border: none;
+                color: black;
+                padding: 16px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                text-align: center;
+                cursor: pointer;
+                margin-bottom: 20px;
+                width: 15%;
+                border-radius: 6px;
+                margin-left: 70px;
+                margin-top: 15px;
+
+            }
+            .submit_button {
+                background-color: #559EFF; /* Green */
+                border: none;
+                color: black;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                margin-left: 25%;
+                margin-bottom: 23px;
+                float: center;
+                border-radius: 5px;
+                width: 20%;
+
+            }
+            .button2:hover {
+                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+            }
+            .form{
+                width: 70%;
+                height: 50%;
+                float: right;
+                position: relative;
+                margin-right: 70px;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+    <body style="background-color:#00BFFF;">
+        <div><h2 id="myHeader">Rumah Sakit ANYAR</h2></div>
+        <form class="form">
+            <div class="form-group">
+                <p>
+                    <strong>Pencarian data pasien</strong>
+                    <br/>
+                </p>
+                <div class="contact-form">
+                    Tanggal : <input type="text" id="tanggal"/> 
+                    <button type="button" onclick="loadDoc()">Cari</button>
+                    <br/><br/><br/><strong>Hasil Pencarian</strong><br/>
+                    <div id="id01"></div>
+                </div>
+            </div>
+        </form>
+        <br/>
+        <br/>
+        <div><a class="button" href="Rumah_Sakit.html">Home</a></div>
+        <div><a class="button" href="TambahAntrian.html">Tambah Antrian</a></div>
+        <div><a class="button" href="CariPasien.html">Cari Pasien</a></div> 
+        <div><a class="button" href="bacaklinik.html">Baca Klinik</a></div>
+        <div><a class="button" href="bacadokter.html">Baca Dokter</a></div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div><h3 id="myfooter">TERIMA KASIH</h3></div>
+
+
+        <script>
+            function loadDoc() {
+                var xmlhttp = new XMLHttpRequest();
+                var url = "http://202.94.83.190:8080/165314042RS/webresources/antrian/cariAntrian?tanggal=" + tanggal.value;
+//                var url = "http://localhost:8084/165314042RS/webresources/antrian/cariAntrian?tanggal=" + tanggal.value;
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log("k");
+                        myFunction(this.responseText);
+                    }
+                }
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
+                function myFunction(response) {
+                    var arr = JSON.parse(response);
+                    var i;
+                    var out = "<table id='tabel'><tr><th>No RM</th><th>Tanggal</th><th>Nama</th><th>Alamat</th><th>Nama Klinik</th></tr>";
+
+                    for (i = 0; i < arr.length; i++) {
+                        out += "<tr><td>" +
+                                arr[i].noRm + "</td><td>" + arr[i].tanggal + "</td><td>" +
+                                arr[i].nama + "</td><td>" + arr[i].alamat + "</td><td>" +
+                                arr[i].namaKlinik;
+                    }
+                    out += "</table>";
+                    document.getElementById("id01").innerHTML = out;
+                }
+            }
+        </script>
+    </body>
+</html>

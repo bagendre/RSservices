@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TUGAS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+            .button {
+                background-color: #00FFFF; /* Aqua */
+                border: none;
+                color: orange;
+                padding: 16px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                -webkit-transition-duration: 0.4s; /* Safari */
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+            .button1 {
+                background-color: orange;
+                color: black;
+                border: 2px solid #555555;
+            }
+
+            .button1:hover {
+                background-color: #006400;
+                color: orange;
+            }
+            #tabel {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 50%;
+            }
+
+            #tabel td, #tabel th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #tabel tr:nth-child(even){background-color: #f2f2f2;}
+
+            #tabel tr:hover {background-color: #006400;}
+
+            #tabel th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #006400;
+                color: white;
+            }
+            #map {
+                height: 50%;
+                width: 50%
+            }
+            /* Optional: Makes the sample page fill the window. */
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <button type="button" onclick="loadMaps()">Maps</button></div>
+        <div id="map"/></div>
+    <br>
+    <button type="button" onclick="loadKlinik()">Klinik</button>
+    <p id="demo2"></p> 
+    <div id="tampil1"></div>
+    <br>
+    <br>
+    <button type="button" onclick="loadDokter()">Dokter</button>
+    <p id="demo3"></p> 
+    <div id="tampil2"></div>
+    <script>
+        var map;
+        function loadMaps() {
+            var url = "http://202.94.83.190:8080/165314042RS/webresources/Location";
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var obj = JSON.parse(this.responseText);
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 15, center: {lat: obj[0].lat, lng: obj[0].lng}, });
+                    var marker = [];
+                    for (var i = 0; i < obj.length; i++) {
+                        marker[i] = new google.maps.Marker({position: {lat: obj[i].lat, lng: obj[i].lng}, map: map});
+                    }
+                }
+            };
+            xhttp.open("GET", url, true);
+            xhttp.send();
+        }
+        function loadKlinik() {
+            var xmlhttp = new XMLHttpRequest();
+            var url = "http://202.94.83.190:8080/165314042RS/webresources/Klinik";
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    myFunction(this.responseText);
+                }
+            }
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+
+            function myFunction(response) {
+                var arr = JSON.parse(response);
+                var i;
+                var out = "<table id='tabel'><tr><th>Nomor</th><th>Nama</th><th>Spesialis</th>";
+
+                for (i = 0; i < arr.length; i++) {
+                    out += "<tr><td>" +
+                            arr[i].idKlinik + "</td><td>" + arr[i].nama + "</td><td>" +
+                            arr[i].spesialis;
+
+                }
+                out += "</table>";
+                document.getElementById("tampil1").innerHTML = out;
+            }
+        }
+        function loadDokter() {
+            var xmlhttp = new XMLHttpRequest();
+    //        var url = "http://202.94.83.190:8080/165314042RS/webresources/Dokter";
+            var url = "http://localhost:8084/165314042RS/webresources/Dokter";
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    myFunction(this.responseText);
+                }
+            }
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+            function myFunction(response) {
+                var arr = JSON.parse(response);
+                var i;
+                var out = "<table id='tabel'><tr><th>Nomor</th><th>Nama Dokter</th><th>Spesialis</th>";
+
+                for (i = 0; i < arr.length; i++) {
+                    out += "<tr><td>" +
+                            arr[i].id + "</td><td>" + arr[i].nama + "</td><td>" +
+                            arr[i].spesialis;
+
+                }
+                out += "</table>";
+                document.getElementById("tampil2").innerHTML = out;
+            }
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnD2l64I6G6fUkPpc3D79Jcau30v8xEKE&callback=initMap"
+    async defer></script>
+</body>
+</html>

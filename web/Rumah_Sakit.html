@@ -1,0 +1,139 @@
+<html>
+    <head>
+        <title>Rumah Sakit</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+
+            #myHeader {
+                background-image: url("Hospitall.jpg");
+                margin: 0px;
+                margin-bottom: 0px;
+                color: orange;
+                padding: 10%;
+                text-align: center;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                font-family: Lucida Handwriting;
+                font-size: 70px;
+
+
+
+            }
+            #myfooter{
+                color:black;
+                background-color: yellow;
+                padding: 30px;
+                text-align: center;
+                float: bottom;
+                border-bottom-right-radius: 10px;
+                border-bottom-left-radius: 10px;
+                margin:0px;
+            }
+            .button {
+
+                background-color: #00FF00; /* Green */
+                border: none;
+                color: black;
+                padding: 16px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                text-align: center;
+                cursor: pointer;
+                margin-bottom: 20px;
+                width: 15%;
+                border-radius: 6px;
+                margin-left: 70px;
+                margin-top: 20px;
+            }
+            #loremx{
+                margin-top: 10px;
+                float: right;
+                width: 50%;
+                margin-right:300px;
+            }
+        </style>
+    </head>
+    <body style="background-color:#00BFFF;">
+        <div><h2 id="myHeader">Rumah Sakit ANYAR</h2></div>
+        <p id="loremx">VISI
+
+            Visi Rumah Sakit ANYAR adalah menjadi Rumah Sakit  yang melaksanakan pelayanan, pendidikan dan riset yang unggul, berkelas dunia, mandiri, bermartabat dan mengabdi kepada kepentingan masyarakat.
+
+            MISI
+
+            menyelenggarakan pelayanan kesehatan terpadu yang bermutu dengan mengutamakan aspek pendidikan berbasis riset dan multidisiplin;
+            melaksanakan pelayanan kesehatan paripurna berdasarkan bukti dan riset ilmu pengetahuan, teknologi kedokteran, dan kesehatan lainnya;
+            melaksanakan fungsi pendidikan untuk dokter dan tenaga kesehatan;
+            menyelenggarakan riset klinik dan non klinik yang berwawasan global;
+            melaksanakan pengabdian kepada kepentingan kesehatan masyarakat;
+            meningkatkan kemandirian Rumah Sakit ANYAR dan kesejahteraan karyawan.
+
+
+        </p>
+        <div><a class="button"  href="login.html">Login</a></div>
+        <div><a class="button"  href="pendaftaran.html">Daftar Pasien</a></div>
+        <div><a class="button"  href="bacaklinik.html">Baca Klinik</a></div>
+        <div><a class="button"  href="bacadokter.html">Baca Dokter</a></div>
+        <div><a class="button"  href="bacaantrian.html">Baca Antrian</a></div>
+        <div><a class="button"  href="TambahAntrian.html">Tambah Antrian</a></div>
+        <br><i>*Login hanya untuk Admin untuk menambah Klinik dan Dokter</i>
+
+        <!-- <div> <h3 id="leftcontent"></h3></div>
+        <div><h3 id="rightcontent"></h3></div> -->
+
+
+
+        <title>Simple Map</title>
+        <meta name="viewport" content="initial-scale=1.0">
+        <meta charset="utf-8">
+        <style>
+            /* Always set the map height explicitly to define the size of the div
+             * element that contains the map. */
+            #map {
+                height: 60%;
+            }
+            /* Optional: Makes the sample page fill the window. */
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+
+
+        <div id="map"></div>
+        <script>
+            var map;
+            function initMap() {
+                // The location of RS
+                var jogja = {lat: -7.795371, lng: 110.369689};
+                var solo = {lat: -7.575521, lng: 110.824428};
+                var gondangan = {lat: -7.717399, lng: 110.402905};
+                // The map, centered at RS
+                var map = new google.maps.Map(
+                        document.getElementById('map'), {zoom: 10, center: jogja});
+                // The marker, positioned at RS
+                var jogja = new google.maps.Marker({position: jogja, map: map});
+                var solo = new google.maps.Marker({position: solo, map: map});
+                var gondangan = new google.maps.Marker({position: gondangan, map: map});
+            }
+            
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnD2l64I6G6fUkPpc3D79Jcau30v8xEKE&callback=initMap"
+        async defer></script>
+
+
+
+
+
+        <div><h3 id="myfooter">TERIMA KASIH</h3></div>
+    </body>
+
+</html>
